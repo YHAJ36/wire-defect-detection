@@ -1,0 +1,40 @@
+# 数据（版权）
+dataset_final_bbox/
+dataset_archive/
+
+# 训练输出
+runs/
+logs/
+
+# 环境
+envs/
+
+# 权重
+*.pt
+*.pth
+*.onnx
+*.kmodel
+
+# 缓存
+__pycache__/
+*.pyc
+.cache
+*.cache
+
+# 编辑器
+.idea/
+.vscode/
+
+# 报告预览
+report/_preview/
+report/_preview_old/
+
+# 老师原项目（未修改，太大）
+ultralytics_wire_main/
+
+# YOLOv5 对照组（嵌套 git 仓库，本地保留）
+code/baselines/yolov5/
+
+# 系统
+.DS_Store
+Thumbs.db
