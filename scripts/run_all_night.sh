@@ -1,4 +1,6 @@
 #!/bin/bash
+D:/yolo-env/Scripts/python.exe D:/2/scripts/fix_settings.py   # settings 被重置时自动恢复
+
 cd /d/2/code/baselines/yolov5
 D:/2/envs/yolov5-env/Scripts/python.exe train_v5.py
 

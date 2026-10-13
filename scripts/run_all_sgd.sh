@@ -1,5 +1,7 @@
 #!/bin/bash
 # 统一优化器为 SGD 后的重跑（v5 不动，v11 4 组 + v12 2 组）
+D:/yolo-env/Scripts/python.exe D:/2/scripts/fix_settings.py   # settings 被重置时自动恢复
+
 cd /d/2/code/yolov11
 D:/yolo-env/Scripts/python.exe train_v11_ablation.py --mode baseline --name wire_v11_v3
 D:/yolo-env/Scripts/python.exe train_v11_ablation.py --mode backbone --name wire_v11_backbone_v3

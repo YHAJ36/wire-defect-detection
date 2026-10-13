@@ -1,6 +1,7 @@
 # 数据（版权）
 dataset_final_bbox/
 dataset_archive/
+dataset_leak_subsets/
 
 # 训练输出
 runs/
@@ -25,9 +26,14 @@ __pycache__/
 .idea/
 .vscode/
 
-# 报告预览
+# 报告预览（逐页 PNG，由 REPORT_PNG 环境变量再生成）
 report/_preview/
 report/_preview_old/
+report/_preview_v4/
+report/_preview_v5/
+report/_preview_v5_1/
+report/_preview_v5_2/
+report/_preview_v_final/
 
 # 老师原项目（未修改，太大）
 ultralytics_wire_main/

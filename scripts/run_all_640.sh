@@ -2,6 +2,8 @@
 # 640 全套：v11×3 (CBAM 消融) → v12×2 → v5×1，各 60ep 串行，末尾自动跑 test 评估。
 # 说明：train_v11_640.py (baseline) 已于 17:05 单独跑完，故此处只补缺的 3 组 v11。
 # 日志：D:/2/train_640_all.log
+D:/yolo-env/Scripts/python.exe D:/2/scripts/fix_settings.py   # settings 被重置时自动恢复
+
 cd /d/2/code/yolov11
 D:/yolo-env/Scripts/python.exe train_v11_640_neck.py
 D:/yolo-env/Scripts/python.exe train_v11_640_backbone.py

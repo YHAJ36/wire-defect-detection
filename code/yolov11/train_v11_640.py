@@ -10,6 +10,9 @@ def parse_args():
     p.add_argument('--mode', choices=['baseline', 'backbone', 'neck_sppf', 'both'], required=True)
     p.add_argument('--name', required=True)
     p.add_argument('--epochs', type=int, default=60)
+    # 中间轮次落盘：ultralytics 只保留 last.pt（逐轮覆盖）与 best.pt，
+    # 不设 save_period 的话跑完就再也拿不到第 20/40 轮的权重（见 WORKLOG 边界 B 的工程前提）。
+    p.add_argument('--save-period', type=int, default=20)
     return p.parse_args()
 
 
@@ -85,6 +88,7 @@ def main():
         close_mosaic=5, label_smoothing=0.1, dropout=0.0,
         amp=True, seed=42, workers=0, device=0,
         project='D:/2/runs', name=args.name, exist_ok=True,
+        save_period=args.save_period,
         trainer=TrainerCls,
     )
 

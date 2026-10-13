@@ -1,4 +1,6 @@
 #!/bin/bash
+D:/yolo-env/Scripts/python.exe D:/2/scripts/fix_settings.py   # settings 被重置时自动恢复
+
 cd /d/2/code/yolov11
 D:/yolo-env/Scripts/python.exe train_v11_ablation_adamw.py --mode baseline --name wire_v11_adamw
 D:/yolo-env/Scripts/python.exe train_v11_ablation_adamw.py --mode backbone --name wire_v11_backbone_adamw
