@@ -1,6 +1,8 @@
 # 数据（版权）
 dataset_final_bbox/
 dataset_archive/
+# P0 输入，可由 make_leak_subsets.py 从 dataset_final_bbox 重建，
+# 不随仓库分发（体积），复现步骤见 WORKLOG.md「当前进度 -【P0】泄漏量化」条
 dataset_leak_subsets/
 
 # 训练输出
@@ -27,13 +29,8 @@ __pycache__/
 .vscode/
 
 # 报告预览（逐页 PNG，由 REPORT_PNG 环境变量再生成）
-report/_preview/
-report/_preview_old/
-report/_preview_v4/
-report/_preview_v5/
-report/_preview_v5_1/
-report/_preview_v5_2/
-report/_preview_v_final/
+# 通配同时覆盖 _preview/、_preview_old/ 与各版本 _preview_vX/
+report/_preview*/
 
 # 老师原项目（未修改，太大）
 ultralytics_wire_main/
