@@ -31,12 +31,43 @@ __pycache__/
 # 报告预览（逐页 PNG，由 REPORT_PNG 环境变量再生成）
 # 通配同时覆盖 _preview/、_preview_old/ 与各版本 _preview_vX/
 report/_preview*/
+# 其余分析/渲染中间产物（可用 report/ 下脚本重建）
+report/_pdf_preview/
+report/_refs_pdf/
+report/_phase0/
+report/_phase1/
+report/_batch2_confusion_896/
+report/_cbam_attention/
+report/_const_dump.txt
+report/_v5_constants.json
+
+# 参考文献原文与结构图合集（版权，且体积大）
+References/
+report/参考文献结构图合集_v1.pdf
+
+# 个人面试材料（仅本地保留，不上传）
+report/面试项目资料_人工智能研发工程师助理_v1.pdf
+report/make_interview_pdf.py
+report/make_interview_figs.py
+report/figures/interview_*.png
+
+# 实验目录中的大数据（4GB）：只保留配置/脚本
+exp_upscale/runs/
+exp_upscale/smoke/
+exp_upscale/logs/
+
+# 第三方数据集副本（体积大、版权）
+dataset_cpm_wear/
 
 # 老师原项目（未修改，太大）
 ultralytics_wire_main/
 
 # YOLOv5 对照组（嵌套 git 仓库，本地保留）
 code/baselines/yolov5/
+
+# 脚本备份（本地保留）
+scripts/*.bak*
+*.bak_*
 
 # 系统
 .DS_Store

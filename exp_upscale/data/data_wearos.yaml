@@ -1,0 +1,8 @@
+# E2: wear 图像 2x 过采样（1428 + 165 = 1593 行）
+path: D:/2/dataset_final_bbox
+train: D:/2/exp_upscale/data/wear_oversample_train.txt
+val: images/val
+test: images/test
+nc: 3
+names: ['break', 'thunderbolt', 'wear']
+task: detect
