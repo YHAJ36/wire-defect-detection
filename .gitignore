@@ -118,3 +118,12 @@ report/_summary_figs/
 # ---- 老师给的界面效果图（版权）----
 pyqt5_demos/
 k210/hat/preview_crop*.jpg
+
+# ============ 2026-11-13 历史清理配套：以下路径已从 git 历史彻底移除 ============
+# 报告与探索报告 PDF（课程交付物）、历史版本归档、注意力可视化、数据集预览与标定图
+report/archive/
+report/_cbam_attention/
+code/tools/data/_output/
+k210/calib/
+k210/calib320/
+archive/*.pdf
