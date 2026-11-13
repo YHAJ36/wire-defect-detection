@@ -1,0 +1,52 @@
+# 行尾统一策略
+# 目的：Windows 与 Linux/macOS 协作时不产生"整文件全改"的假 diff。
+# 索引（仓库内存储）一律用 LF；工作区按文件类型决定检出成什么。
+
+* text=auto
+
+# 源码与配置：检出时也用 LF（Python / YAML / Markdown 对 CRLF 敏感度低，
+# 但统一成 LF 可以避免跨平台 diff 噪声）
+*.py       text eol=lf
+*.md       text eol=lf
+*.yaml     text eol=lf
+*.yml      text eol=lf
+*.json     text eol=lf
+*.txt      text eol=lf
+*.sh       text eol=lf
+*.cfg      text eol=lf
+*.ini      text eol=lf
+
+# Windows 批处理与 PowerShell 必须用 CRLF，否则 cmd 解析可能出错
+*.bat      text eol=crlf
+*.cmd      text eol=crlf
+*.ps1      text eol=crlf
+
+# 二进制：禁止行尾转换、禁止文本合并（否则 CRLF/LF 互转会损坏文件）
+*.png      binary
+*.jpg      binary
+*.jpeg     binary
+*.gif      binary
+*.bmp      binary
+*.pdf      binary
+*.pt       binary
+*.pth      binary
+*.onnx     binary
+*.kmodel   binary
+*.bin      binary
+*.npz      binary
+*.npy      binary
+*.zip      binary
+*.tar      binary
+*.gz       binary
+*.exe      binary
+*.whl      binary
+*.docx     binary
+*.xlsx     binary
+*.pptx     binary
+
+# GitHub 语言统计：第三方库与生成物不计入本项目主语言占比
+References/**           linguist-vendored
+code/baselines/**       linguist-vendored
+*.ipynb                 linguist-documentation
+WORKLOG.md              linguist-documentation
+DIRECTORY.md            linguist-documentation

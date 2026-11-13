@@ -158,3 +158,14 @@ python code/yolov11/train_att_640.py --att cbam_bn --mode neck_sppf --imgsz 896 
 - 所有对比固定数据切分、训练轮数与评估口径；val 用于选择，test 只做最终评估。
 - `runs/` 为封版阶段产物，`exp_upscale/runs/` 为后续实验产物；训练产物均未入库。
 - 各框架采用各自推荐配置，通用超参（优化器、初始学习率、epochs、batch、imgsz）保持一致。
+
+## 许可
+
+- 本项目**自写的代码与文档**采用 [MIT License](LICENSE)。
+- 训练与推理依赖 Ultralytics YOLOv5 / YOLOv8 / YOLO11，其为 **AGPL-3.0** 许可。
+  仓库内 `code/baselines/` 下只有调用官方 `train.py` 的参数封装脚本（30~50 行），
+  **不含其源码副本**；但实际运行这些脚本即构成对 AGPL 组件的使用，任何形式的
+  分发（含以网络服务形式提供）都需自行遵守 AGPL-3.0 条款。商用前请评估
+  Ultralytics 商业许可。
+- **数据集与模型权重不随本仓库分发**，其权利归原始提供方所有，本仓库不构成对
+  这些数据的任何授权。复现时需自行获取，参见 [DIRECTORY.md](DIRECTORY.md)。
