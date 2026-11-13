@@ -72,3 +72,48 @@ scripts/*.bak*
 # 系统
 .DS_Store
 Thumbs.db
+
+# ============ 2026-11-13 补充：权重 / 数据集 / 版权件 / 交付物一律不入库 ============
+# 虚拟环境软链（指向 D:/yolo-env）
+.venv/
+
+# 本地备份（报告多版本 .bak、桌面副本）
+_backup/
+
+# ---- 数据集（全部）----
+dataset_noleak/
+dataset_noleak_clean/
+dataset_noleak_strat/
+dataset_helmet/_raw/
+k210/hat/dataset/
+k210/v5/dataset_break/
+k210/v5/dataset_strike/
+
+# ---- 板上产物 / 固件 / 编译器（第三方或体积大）----
+k210/ncc.exe
+k210/fw/
+k210/backup/
+k210/v5/runs/
+k210/v5/demo/
+k210/v5/demo_strike/
+*.bin
+*.npz
+
+# ---- 部署日志与缓存 ----
+*.log
+deploy/tmp/
+deploy/wheels/
+deploy/_pdf_yolo.txt
+deploy/board_case/
+
+# ---- 报告交付物（课程作业，不公开）----
+report/*.docx
+report/*.pdf
+report/_backup/
+report/_chk*/
+report/_p2_diag/
+report/_phase1_probe/
+report/_summary_figs/
+
+# ---- 老师给的界面效果图（版权）----
+pyqt5_demos/
