@@ -30,6 +30,8 @@ from ultralytics import YOLO
 
 sys.path.insert(0, 'D:/2/code/yolov11')
 
+import p2_transfer
+
 EXP = 'D:/2/exp_upscale/runs'
 DATA = 'D:/2/dataset_final_bbox/data.yaml'
 
@@ -61,6 +63,10 @@ def make_p2_trainer(pretrained):
             from ultralytics.nn.tasks import attempt_load_one_weight
             w, _ = attempt_load_one_weight(pretrained)
             model.load(w)
+            # 加检测尺度会让层号与分支号整体位移，model.load 只能按名字对齐，
+            # 位移部分会被静默丢弃（实测旧配置检测头 161 个张量全部丢失）。
+            # 这里按已核对的映射补搬，详见 code/yolov11/p2_transfer.py。
+            p2_transfer.transfer(model, w)
             return model
 
     return P2Trainer

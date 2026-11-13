@@ -77,6 +77,7 @@ BASE = dict(
     hsv_h=0.02, hsv_s=0.8, hsv_v=0.5,
     degrees=0.0, translate=0.1, scale=0.5, fliplr=0.5,
     close_mosaic=5, label_smoothing=0.1, dropout=0.0,
+    rect=False,
     amp=True, workers=0, device=0,
     project=EXP, exist_ok=True,
 )
@@ -185,7 +186,40 @@ def parse_args():
                    help='注入位置；默认 neck_sppf（报告表 10 唯一非负方向）')
     p.add_argument('--seed', type=int, default=42)
     p.add_argument('--epochs', type=int, default=60)
+    # 训练预算实验用：默认 None = 沿用 BASE（5），不传即与原口径逐项一致
+    p.add_argument('--close-mosaic', type=int, default=None,
+                   help='mosaic 关闭前最后 N 轮；不传则保持 BASE 的 5')
+    # ---- A.9.42 审计后的可调项（默认值 = 原 BASE，不传即行为不变）----
+    p.add_argument('--nbs', type=int, default=None,
+                   help='名义 batch；1428 张 / batch 8 下 nbs=64 只有 22 次更新/epoch')
+    p.add_argument('--box', type=float, default=None, help='定位损失权重，默认 7.5')
+    p.add_argument('--cls', type=float, default=None,
+                   help='分类损失权重，默认 0.5；本项目分类已解，可下调给定位让权重')
+    p.add_argument('--dfl', type=float, default=None,
+                   help='DFL 权重，默认 1.5；提高可压回归抖动')
+    p.add_argument('--mixup', type=float, default=None,
+                   help='mixup 概率，默认 0.1；会混两张图的框，与降回归抖动冲突')
+    p.add_argument('--mosaic', type=float, default=None, help='mosaic 概率，默认 0.8')
+    p.add_argument('--degrees', type=float, default=None, help='旋转角度增广，默认 0')
+    p.add_argument('--weight-decay', type=float, default=None, help='默认 0.0005')
+    p.add_argument('--dropout', type=float, default=None, help='默认 0.0')
+    # A.9.42 P0：best.pt 的挑选口径。默认已改为 0.5（交付口径），
+    # 旧 run 是按 0.7 选的，要逐位复现旧选择过程请显式传 0.7。
+    p.add_argument('--val-iou', type=float, default=0.5,
+                   help='训练期 val 的 NMS IoU，决定 best.pt 按哪个口径挑（默认 0.5）')
     p.add_argument('--imgsz', type=int, default=640)
+    # 段级无泄漏重训（2026-10-26）：新数据集的 data.yaml。
+    # 默认 None ⇒ 沿用 DATA（dataset_final_bbox），因此历史上所有 run 的复现行为逐项不变。
+    p.add_argument('--data', default=None,
+                   help='data.yaml 路径；不传则用 dataset_final_bbox（历史口径）')
+    # A.9.53：1920×1080 letterbox 到 896×896 有 43.75% 是灰边（有效画面仅 896×504），
+    # 等于每张图浪费掉近一半分辨率预算。rect 让长边缩到 imgsz、短边按长宽比走，
+    # 框架按长宽比分 batch，使每个 batch 内同尺寸、无灰边。
+    # ⚠ 代价：ultralytics 在 dataset.rect=True 时**强制 shuffle=False**
+    #   （models/yolo/detect/train.py get_dataloader 里写死），因此这是
+    #   「消灰边 + 关 shuffle」的复合改动，不能单独归因于前者。
+    p.add_argument('--rect', action='store_true',
+                   help='矩形输入（长边=imgsz，按长宽比分 batch，消除 letterbox 灰边）')
     p.add_argument('--name', default=None)
     p.add_argument('--save-period', type=int, default=20)
     p.add_argument('--resume', action='store_true',
@@ -205,8 +239,22 @@ def main():
     kw['seed'] = args.seed
     kw['imgsz'] = args.imgsz
     kw['save_period'] = args.save_period
+    if args.data:
+        kw['data'] = args.data
+    if args.close_mosaic is not None:
+        kw['close_mosaic'] = args.close_mosaic
+    # A.9.42：只覆盖显式传入的项，不传则与旧口径逐项一致
+    for a, k in (('nbs', 'nbs'), ('box', 'box'), ('cls', 'cls'), ('dfl', 'dfl'),
+                 ('mixup', 'mixup'), ('mosaic', 'mosaic'), ('degrees', 'degrees'),
+                 ('weight_decay', 'weight_decay'), ('dropout', 'dropout')):
+        v = getattr(args, a)
+        if v is not None:
+            kw[k] = v
+    kw['iou'] = args.val_iou      # best.pt 挑选口径（P0）
     if args.fraction is not None:
         kw['fraction'] = args.fraction
+    if args.rect:
+        kw['rect'] = True
     if args.device is not None:
         kw['device'] = args.device
     if args.project is not None:
@@ -217,6 +265,9 @@ def main():
 
     print(f'=== att={args.att}  mode={args.mode}  seed={args.seed}  '
           f'imgsz={args.imgsz}  epochs={args.epochs}  name={kw["name"]} ===')
+    diff = {k: v for k, v in kw.items() if BASE.get(k) != v and k not in ('name',)}
+    if diff:
+        print('    覆盖项：' + '  '.join(f'{k}={v}' for k, v in sorted(diff.items())))
     if args.fraction is not None:
         print(f'    ⚠ 冒烟：fraction={args.fraction}（非正式口径）')
 
