@@ -50,3 +50,7 @@ code/baselines/**       linguist-vendored
 *.ipynb                 linguist-documentation
 WORKLOG.md              linguist-documentation
 DIRECTORY.md            linguist-documentation
+
+# 自身与许可证也固定 LF，避免检出时反复提示
+.gitattributes text eol=lf
+LICENSE        text eol=lf
