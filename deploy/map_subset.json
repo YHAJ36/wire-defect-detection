@@ -1,0 +1,62 @@
+{
+  "n": 40,
+  "onnx": {
+    "0": 0.46795448775646803,
+    "1": 0.6772277227722773,
+    "2": 0.9356435643564357
+  },
+  "kmodel": {
+    "0": 0.4614326894091361,
+    "1": 0.6644664466446645,
+    "2": 0.9356435643564357
+  },
+  "map50_onnx": 0.6936085916283936,
+  "map50_kmodel": 0.6871809001367454,
+  "n_gt": {
+    "0": 22,
+    "1": 13,
+    "2": 19
+  },
+  "files": [
+    "firc_xianlan_100.jpg",
+    "firc_xianlan_1013.jpg",
+    "firc_xianlan_103.jpg",
+    "firc_xianlan_1054.jpg",
+    "firc_xianlan_1090.jpg",
+    "firc_xianlan_1111.jpg",
+    "firc_xianlan_1171.jpg",
+    "firc_xianlan_122.jpg",
+    "firc_xianlan_1307.jpg",
+    "firc_xianlan_1471.jpg",
+    "firc_xianlan_1544.jpg",
+    "firc_xianlan_1578.jpg",
+    "firc_xianlan_1616.jpg",
+    "firc_xianlan_1642.jpg",
+    "firc_xianlan_1693.jpg",
+    "firc_xianlan_171.jpg",
+    "firc_xianlan_175.jpg",
+    "firc_xianlan_178.jpg",
+    "firc_xianlan_185.jpg",
+    "firc_xianlan_190.jpg",
+    "firc_xianlan_198.jpg",
+    "firc_xianlan_23.jpg",
+    "firc_xianlan_250.jpg",
+    "firc_xianlan_258.jpg",
+    "firc_xianlan_32.jpg",
+    "firc_xianlan_359.jpg",
+    "firc_xianlan_40.jpg",
+    "firc_xianlan_42.jpg",
+    "firc_xianlan_46.jpg",
+    "firc_xianlan_500.jpg",
+    "firc_xianlan_54.jpg",
+    "firc_xianlan_569.jpg",
+    "firc_xianlan_598.jpg",
+    "firc_xianlan_63.jpg",
+    "firc_xianlan_66.jpg",
+    "firc_xianlan_714.jpg",
+    "firc_xianlan_74.jpg",
+    "firc_xianlan_766.jpg",
+    "firc_xianlan_88.jpg",
+    "firc_xianlan_93.jpg"
+  ]
+}
